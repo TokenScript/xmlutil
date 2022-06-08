@@ -53,4 +53,42 @@ class TestKtXmlReader {
 
         }
     }
+
+    @Test
+    fun testGenericReadEntity() {
+        val xml = """<tag>&lt;foo&amp;&#039;&gt;</tag>"""
+        XmlStreaming.newGenericReader(xml).use { reader ->
+            assertEquals(EventType.START_ELEMENT, reader.nextTag())
+            assertEquals(QName("tag"), reader.name)
+
+            val actualText = StringBuilder()
+            while (reader.next().isTextElement) {
+                actualText.append(reader.text)
+            }
+
+            assertEquals("<foo&'>", actualText.toString())
+
+            assertEquals(EventType.END_ELEMENT, reader.eventType)
+            assertEquals(QName("tag"), reader.name)
+        }
+    }
+
+    @Test
+    fun testReadEntity() {
+        val xml = """<tag>&lt;foo&amp;&#039;&gt;</tag>"""
+        XmlStreaming.newReader(xml).use { reader ->
+            assertEquals(EventType.START_ELEMENT, reader.nextTag())
+            assertEquals(QName("tag"), reader.name)
+
+            val actualText = StringBuilder()
+            while (reader.next().isTextElement) {
+                actualText.append(reader.text)
+            }
+
+            assertEquals("<foo&'>", actualText.toString())
+
+            assertEquals(EventType.END_ELEMENT, reader.eventType)
+            assertEquals(QName("tag"), reader.name)
+        }
+    }
 }

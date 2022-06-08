@@ -151,15 +151,15 @@ public enum class EventType {
         override val isTextElement: Boolean get() = true
 
         override fun createEvent(reader: XmlReader): TextEvent = reader.run {
-            TextEvent(locationInfo, ENTITY_REF, text)
+            EntityRefEvent(locationInfo, reader.localName, text)
         }
 
         override fun writeEvent(writer: XmlWriter, textEvent: TextEvent) {
-            writer.entityRef(textEvent.text)
+            writer.text(textEvent.text)
         }
 
         override fun writeEvent(writer: XmlWriter, reader: XmlReader) {
-            writer.entityRef(reader.text)
+            writer.text(reader.text)
         }
     },
     IGNORABLE_WHITESPACE {
