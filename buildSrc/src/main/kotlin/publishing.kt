@@ -44,7 +44,7 @@ fun Project.doPublish(
 
     configure<PublishingExtension> {
         repositories {
-            maven {
+            /*maven {
                 name = "OSS_registry"
                 val repositoryId = project.properties["xmlutil.repositoryId"] as String?
                 url = when {
@@ -60,10 +60,11 @@ fun Project.doPublish(
                     password = project.findProperty("ossrh.password") as String?
                 }
 
-            }
+            }*/
+            mavenLocal()
         }
 
-        configure<SigningExtension> {
+        /*configure<SigningExtension> {
             val priv_key:String? = System.getenv("GPG_PRIV_KEY")
             val passphrase:String? = System.getenv("GPG_PASSPHRASE")
             if (priv_key==null ||passphrase==null) {
@@ -72,7 +73,7 @@ fun Project.doPublish(
             } else {
                 useInMemoryPgpKeys(priv_key, passphrase)
             }
-        }
+        }*/
 
         val javadocJarTask = tasks.create<Jar>("javadocJar") {
             archiveClassifier.set("javadoc")
@@ -82,12 +83,12 @@ fun Project.doPublish(
         publications.withType<MavenPublication> {
             artifact(javadocJarTask)
 
-            val pub = this
+            /*val pub = this
             configure<SigningExtension> {
                 setRequired { gradle.taskGraph.run { hasTask("publish") || hasTask("publishNative") } }
 
                 sign(pub)
-            }
+            }*/
             pom {
                 name.set(pubName)
                 description.set(pubDescription)
