@@ -62,6 +62,14 @@ fun Project.doPublish(
 
             }*/
             mavenLocal()
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/TokenScript/xmlutil")
+                credentials {
+                    username = System.getenv("GITHUB_ACTOR")
+                    password = System.getenv("GITHUB_TOKEN")
+                }
+            }
         }
 
         /*configure<SigningExtension> {
