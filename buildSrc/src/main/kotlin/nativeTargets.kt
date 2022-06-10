@@ -104,23 +104,23 @@ fun Project.addNativeTargets() {
                     }
 
                     if (nativeState != NativeState.HOST || host == Host.Macos) {
-                        macosX64 { addSourceSets() }
+                        //macosX64 { addSourceSets() }
                         iosArm64 { addSourceSets() }
-                        iosArm32 { addSourceSets() }
+                        //iosArm32 { addSourceSets() }
                         iosX64 { addSourceSets() }
 
-                        watchosX86 { addSourceSets() }
-                        watchosX64 { addSourceSets() }
-                        watchosArm32 { addSourceSets() }
-                        watchosArm64 { addSourceSets() }
+                        //watchosX86 { addSourceSets() }
+                        //watchosX64 { addSourceSets() }
+                        //watchosArm32 { addSourceSets() }
+                        //watchosArm64 { addSourceSets() }
 
-                        tvosArm64 { addSourceSets() }
-                        tvosX64 { addSourceSets() }
+                        //tvosArm64 { addSourceSets() }
+                        //tvosX64 { addSourceSets() }
 
-                        addTarget("iosSimulatorArm64")
-                        addTarget("watchosSimulatorArm64")
-                        addTarget("tvosSimulatorArm64")
-                        addTarget("macosArm64")
+                        //addTarget("iosSimulatorArm64")
+                        //addTarget("watchosSimulatorArm64")
+                        //addTarget("tvosSimulatorArm64")
+                        //addTarget("macosArm64")
                     }
 
                     if (nativeState != NativeState.HOST || host == Host.Windows) {
